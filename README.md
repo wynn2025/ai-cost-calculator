@@ -1,137 +1,122 @@
-# AI API Cost Calculator - LLM API费用计算与对比工具
+# AI Programming Cost Planner - AI编程成本计算器
 
-> 一键对比10+主流大模型API的费用，帮你在AI编程时代选对工具、省大钱。
-
-[![Python](https://img.shields.io/badge/Python-3.6%2B-blue)](https://python.org)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-
-## 为什么需要这个工具？
-
-ChatGPT、Claude、DeepSeek、Gemini...大模型越来越多，价格差异巨大！
-- Claude 4 Opus：$15/M输入token
-- DeepSeek-V4：$0.27/M输入token
-- **差价55倍！**
-
-用错模型，一年多花几万块。这个工具帮你精确计算、对比各模型费用。
+> 根据你的编程场景（语言、编码时长、项目类型、预算），推荐最优AI工具组合方案。
+> 用 Rich 库做漂亮终端UI，交互式引导，5分钟找到最适合你的AI编程方案。
 
 ## 功能特点
 
-- **10+模型对比** - DeepSeek/GPT-4o/Claude 4/Gemini 2.5/Qwen3/Llama 4等
-- **三种使用频率** - 按小时/每天/每周/每月计算
-- **可视化图表** - 自动生成对比柱状图
-- **交互模式** - 引导式输入，新手友好
-- **快速模式** - 一键输出默认对比
-- **JSON导出** - 方便集成到其他工具
+- **个性化推荐** - 根据语言/时长/项目/预算匹配最优工具
+- **10+ AI工具数据库** - Cursor/Copilot/Claude Code/DeepSeek/Windsurf/GPT-4o等
+- **6套预设方案** - 从零成本到土豪方案，总有一款适合你
+- **Rich终端UI** - 彩色表格、进度条、面板，终端也能很好看
+- **省钱对比** - 自动计算vs最贵方案的节省金额和百分比
+- **无Rich也能用** - `--no-rich`降级为纯文本输出
 
 ## 快速开始
 
-### 安装（图表功能可选）
+### 安装依赖
 
 ```bash
-pip install matplotlib  # 可选，不要图表也能用
+pip install rich  # 可选，没有也能运行（纯文本模式）
 ```
 
-### 1. 快速对比
+### 方式1：交互式引导
 
 ```bash
-python main.py --quick
+python ai_coding_planner.py
 ```
 
-输出示例：
-```
-======================================================================
-  API Cost Comparison Report
-  Tokens/call: 50,000 | Freq: daily | I/O: 60/40
-======================================================================
-Model                       Per Call    Monthly       Annual
-----------------------------------------------------------------------
-DeepSeek-V4 (cache)          $0.0371    $1.11       $13.35
-DeepSeek-V4                  $0.1428    $4.28       $51.42
-Llama 4 Maverick             $0.1240    $3.72       $44.64
-Qwen3-235B                   $0.3100    $9.30      $111.60
-Gemini 2.5 Flash             $0.1860    $5.58       $66.96
-GPT-4o                       $5.5000  $165.00     $1980.00  <-- CHEAPEST
-Claude 4 Sonnet              $9.3000  $279.00     $3348.00
-Gemini 2.5 Pro               $4.7500  $142.50     $1710.00
-----------------------------------------------------------------------
-```
+回答4个问题，获取个性化推荐。
 
-### 2. 自定义参数
+### 方式2：快速模式
 
 ```bash
-# 每次调用10万token，每周一次
-python main.py --tokens 100000 --freq weekly
+python ai_coding_planner.py --quick
+```
 
-# 对比所有模型
-python main.py --tokens 50000 --freq daily --all --chart
+使用默认参数（Python/4h/后端/200元预算）直接输出推荐。
 
-# 指定模型
-python main.py --tokens 100000 --freq monthly --models "DeepSeek-V4" "GPT-4o" "Claude 4 Sonnet"
+### 方式3：命令行参数
+
+```bash
+python ai_coding_planner.py --lang "JavaScript/TypeScript" --hours 4 --project web --budget 200
+```
+
+### 方式4：查看所有工具对比
+
+```bash
+python ai_coding_planner.py --compare
+```
+
+### 方式5：查看所有方案
+
+```bash
+python ai_coding_planner.py --plans
 ```
 
 ## 使用示例
 
-### 示例1：团队月度成本预估
+### 示例1：Python后端开发者
 
 ```bash
-python main.py --tokens 200000 --freq hourly --chart --output team_cost
+python ai_coding_planner.py --lang Python --hours 4 --project backend --budget 200
 ```
-假设每小时自动调用一次20万token的API，生成年度成本报告和图表。
 
-### 示例2：选出性价比最高的模型
+输出：推荐 Cursor Pro + DeepSeek API，月费182元，vs最贵方案省1410元/月。
+
+### 示例2：学生/轻度用户
 
 ```bash
-python main.py --quick --json
+python ai_coding_planner.py --lang Python --hours 1 --project script --budget 0
 ```
-快速模式+JSON输出，方便脚本化处理。
 
-### 示例3：项目预算规划
+输出：推荐 Codeium Free，完全免费，基础补全够用。
+
+### 示例3：全职全栈开发者
 
 ```bash
-python main.py --tokens 50000 --freq daily --all
+python ai_coding_planner.py --lang "JavaScript/TypeScript" --hours 5 --project fullstack --budget 500
 ```
-每日5万token调用量，对比全部10个模型的年度费用。
 
-## 支持的模型
+输出：推荐重度AI编程方案，Claude Code(DeepSeek)+Cursor，月费174元。
 
-| 模型 | 输入价格/M tokens | 输出价格/M tokens | 上下文 |
-|------|-------------------|-------------------|--------|
-| DeepSeek-V4 | $0.27 | $1.10 | 128K |
-| DeepSeek-V4 (cache) | $0.07 | $0.28 | 128K |
-| GPT-4o | $2.50 | $10.00 | 128K |
-| GPT-4o-mini | $0.15 | $0.60 | 128K |
-| Claude 4 Sonnet | $3.00 | $15.00 | 200K |
-| Claude 4 Opus | $15.00 | $75.00 | 200K |
-| Gemini 2.5 Pro | $1.25 | $10.00 | 1M |
-| Gemini 2.5 Flash | $0.15 | $0.60 | 1M |
-| Qwen3-235B | $0.50 | $2.00 | 128K |
-| Llama 4 Maverick | $0.20 | $0.80 | 1M |
+## 支持的AI工具
+
+| 工具 | 类型 | 月费(元) | 代码质量 | 速度 | 性价比 |
+|------|------|---------|---------|------|--------|
+| Cursor Pro | IDE | 152 | 9/10 | 9/10 | 7/10 |
+| GitHub Copilot | IDE | 76 | 8/10 | 8/10 | 8/10 |
+| Claude Code (Max) | 订阅 | 1440 | 10/10 | 8/10 | 3/10 |
+| Claude Code (DeepSeek方案) | 订阅 | 22 | 8/10 | 8/10 | 10/10 |
+| Windsurf | IDE | 107 | 8/10 | 8/10 | 7/10 |
+| DeepSeek API | API | 30 | 8/10 | 7/10 | 10/10 |
+| GPT-4o API | API | 110 | 9/10 | 8/10 | 6/10 |
+| Codeium Free | 免费 | 0 | 6/10 | 7/10 | 10/10 |
+| Cline + DeepSeek | 免费 | 15 | 7/10 | 7/10 | 10/10 |
+| Gemini 2.5 Pro | API | 89 | 8/10 | 7/10 | 7/10 |
 
 ## 命令行参数
 
 | 参数 | 说明 |
 |------|------|
-| `--quick` | 快速模式（50K tokens, daily） |
-| `--tokens N` | 每次调用的token数量 |
-| `--freq` | 调用频率: hourly/daily/weekly/monthly |
-| `--chart` | 生成对比图表 |
-| `--json` | 导出JSON格式 |
-| `--all` | 对比所有模型 |
-| `--models` | 指定模型列表 |
-| `--output` | 输出文件路径 |
-
-## 定价
-
-**免费版**: 命令行基础功能
-**付费版**: 29元（含可视化图表+JSON导出+未来新增模型）
-
-适合：AI应用开发者、技术团队负责人、独立开发者、API重度用户
+| `--lang` | 编程语言 |
+| `--hours` | 每天编码时长 (1/2/4/5) |
+| `--project` | 项目类型 (web/backend/mobile/data/script/infra/fullstack) |
+| `--budget` | 月预算 (CNY) |
+| `--compare` | 查看全部工具对比表 |
+| `--plans` | 查看所有推荐方案 |
+| `--quick` | 快速模式（默认参数） |
+| `--no-rich` | 禁用Rich UI，纯文本输出 |
 
 ## 系统要求
 
 - Python 3.6+
-- matplotlib（可选，用于图表生成）
+- rich（可选，用于美化终端输出）
 
 ## License
 
 MIT License
+
+## 相关推广
+
+配合CSDN文章《AI编程省钱指南》一起推广，闲鱼上架9.9元。

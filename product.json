@@ -1,0 +1,31 @@
+{
+  "name": "AI Cost Calculator",
+  "name_cn": "AI编程成本计算器",
+  "version": "1.0.0",
+  "author": "AI Tools Workshop",
+  "license": "MIT",
+  "description": "根据编程场景推荐最优AI工具组合，对比10+主流工具价格，估算月/年费用。Rich终端UI，交互式引导。",
+  "features": [
+    "10+ AI工具数据库(Cursor/Copilot/Claude Code/DeepSeek等)",
+    "6套预设方案(零成本到土豪)",
+    "Rich终端UI彩色表格",
+    "省钱对比(自动算vs最贵方案节省)",
+    "无Rich也能用(--no-rich降级)",
+    "交互式引导+命令行参数两种模式"
+  ],
+  "price": 29,
+  "currency": "CNY",
+  "target_platforms": [
+    "xianyu",
+    "github"
+  ],
+  "tags": [
+    "ai",
+    "cost",
+    "calculator",
+    "comparison",
+    "tools"
+  ],
+  "file": "ai_coding_planner.py",
+  "lines": 595
+}

@@ -1,2 +1,2 @@
-# Required for chart generation (optional)
+rich>=10.0.0
 matplotlib>=3.5.0
