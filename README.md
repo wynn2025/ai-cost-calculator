@@ -1,122 +1,72 @@
-# AI Programming Cost Planner - AI编程成本计算器
+# AI Programming Cost Calculator v2.1
 
-> 根据你的编程场景（语言、编码时长、项目类型、预算），推荐最优AI工具组合方案。
-> 用 Rich 库做漂亮终端UI，交互式引导，5分钟找到最适合你的AI编程方案。
+> 11款AI编程工具成本对比 | 5种省钱套餐 | Markdown/CSV导出 | 按预算推荐
 
-## 功能特点
-
-- **个性化推荐** - 根据语言/时长/项目/预算匹配最优工具
-- **10+ AI工具数据库** - Cursor/Copilot/Claude Code/DeepSeek/Windsurf/GPT-4o等
-- **6套预设方案** - 从零成本到土豪方案，总有一款适合你
-- **Rich终端UI** - 彩色表格、进度条、面板，终端也能很好看
-- **省钱对比** - 自动计算vs最贵方案的节省金额和百分比
-- **无Rich也能用** - `--no-rich`降级为纯文本输出
-
-## 快速开始
-
-### 安装依赖
+## Quick Start
 
 ```bash
-pip install rich  # 可选，没有也能运行（纯文本模式）
+# Show all tools comparison table
+python ai_cost_compare.py --compare
+
+# Show bundle recommendations
+python ai_cost_compare.py --bundles
+
+# Export as Markdown
+python ai_cost_compare.py --export md
+
+# Export as CSV
+python ai_cost_compare.py --export csv
+
+# Budget recommendation (e.g. 100 CNY/month)
+python ai_cost_compare.py --budget 100
+
+# Search specific tool
+python ai_cost_compare.py --tool Cursor
+
+# Interactive mode (no args)
+python ai_cost_compare.py
 ```
 
-### 方式1：交互式引导
+## Compared Tools (11)
 
-```bash
-python ai_coding_planner.py
-```
+| Tool | Monthly (CNY) | Type | Rating |
+|------|--------------|------|--------|
+| Augment Code | 0 (FREE) | IDE Plugin | 8.0 |
+| Codeium Free | 0 (FREE) | IDE Plugin | 7.8 |
+| Trae (ByteDance) | 0 (FREE) | AI IDE | 8.2 |
+| Amazon Q Developer | 0 (FREE) | IDE Plugin | 7.5 |
+| DeepSeek API | 15 | API | 9.0 |
+| DS+Claude Combo | 22 | Combo | 9.3 |
+| GitHub Copilot | 76 | IDE Plugin | 8.8 |
+| Windsurf Pro | 105 | AI IDE | 8.5 |
+| Claude Code Pro | 144 | Terminal AI | 9.0 |
+| Cursor Pro | 152 | AI IDE | 9.2 |
+| Claude Code Max | 1,440 | Terminal AI | 9.5 |
 
-回答4个问题，获取个性化推荐。
+## Bundle Recommendations
 
-### 方式2：快速模式
+| Bundle | Monthly | Annual | Tools |
+|--------|---------|--------|-------|
+| Zero Cost | 0 | 0 | Augment + Codeium |
+| Minimal | 15 | 180 | DeepSeek API + Codeium |
+| Best Value | 22 | 264 | DS+Claude Combo + Trae |
+| Professional | 167 | 1,700 | Cursor Pro + DeepSeek API |
+| Flagship | 220 | 2,200 | Claude Code Pro + Copilot |
 
-```bash
-python ai_coding_planner.py --quick
-```
+## Features
 
-使用默认参数（Python/4h/后端/200元预算）直接输出推荐。
+- **Full comparison table**: Side-by-side cost, type, rating, best use case
+- **Monthly + Annual pricing**: See both at a glance
+- **Markdown export**: One command generates a publishable comparison document
+- **CSV export**: For spreadsheets and data analysis
+- **Budget planner**: Input your budget, get ranked recommendations
+- **Zero dependencies**: Pure Python standard library only
 
-### 方式3：命令行参数
+## Also Included
 
-```bash
-python ai_coding_planner.py --lang "JavaScript/TypeScript" --hours 4 --project web --budget 200
-```
-
-### 方式4：查看所有工具对比
-
-```bash
-python ai_coding_planner.py --compare
-```
-
-### 方式5：查看所有方案
-
-```bash
-python ai_coding_planner.py --plans
-```
-
-## 使用示例
-
-### 示例1：Python后端开发者
-
-```bash
-python ai_coding_planner.py --lang Python --hours 4 --project backend --budget 200
-```
-
-输出：推荐 Cursor Pro + DeepSeek API，月费182元，vs最贵方案省1410元/月。
-
-### 示例2：学生/轻度用户
-
-```bash
-python ai_coding_planner.py --lang Python --hours 1 --project script --budget 0
-```
-
-输出：推荐 Codeium Free，完全免费，基础补全够用。
-
-### 示例3：全职全栈开发者
-
-```bash
-python ai_coding_planner.py --lang "JavaScript/TypeScript" --hours 5 --project fullstack --budget 500
-```
-
-输出：推荐重度AI编程方案，Claude Code(DeepSeek)+Cursor，月费174元。
-
-## 支持的AI工具
-
-| 工具 | 类型 | 月费(元) | 代码质量 | 速度 | 性价比 |
-|------|------|---------|---------|------|--------|
-| Cursor Pro | IDE | 152 | 9/10 | 9/10 | 7/10 |
-| GitHub Copilot | IDE | 76 | 8/10 | 8/10 | 8/10 |
-| Claude Code (Max) | 订阅 | 1440 | 10/10 | 8/10 | 3/10 |
-| Claude Code (DeepSeek方案) | 订阅 | 22 | 8/10 | 8/10 | 10/10 |
-| Windsurf | IDE | 107 | 8/10 | 8/10 | 7/10 |
-| DeepSeek API | API | 30 | 8/10 | 7/10 | 10/10 |
-| GPT-4o API | API | 110 | 9/10 | 8/10 | 6/10 |
-| Codeium Free | 免费 | 0 | 6/10 | 7/10 | 10/10 |
-| Cline + DeepSeek | 免费 | 15 | 7/10 | 7/10 | 10/10 |
-| Gemini 2.5 Pro | API | 89 | 8/10 | 7/10 | 7/10 |
-
-## 命令行参数
-
-| 参数 | 说明 |
-|------|------|
-| `--lang` | 编程语言 |
-| `--hours` | 每天编码时长 (1/2/4/5) |
-| `--project` | 项目类型 (web/backend/mobile/data/script/infra/fullstack) |
-| `--budget` | 月预算 (CNY) |
-| `--compare` | 查看全部工具对比表 |
-| `--plans` | 查看所有推荐方案 |
-| `--quick` | 快速模式（默认参数） |
-| `--no-rich` | 禁用Rich UI，纯文本输出 |
-
-## 系统要求
-
-- Python 3.6+
-- rich（可选，用于美化终端输出）
+- `ai_coding_planner.py` - Interactive 4-step recommendation wizard
+- `cost_calculator.py` - API token cost calculator (DeepSeek/Claude/GPT)
 
 ## License
 
-MIT License
-
-## 相关推广
-
-配合CSDN文章《AI编程省钱指南》一起推广，闲鱼上架9.9元。
+MIT
