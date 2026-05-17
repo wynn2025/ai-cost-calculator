@@ -1,34 +1,37 @@
 {
   "name": "AI Programming Cost Calculator",
-  "version": "2.1",
-  "type": "cli",
+  "version": "2.0",
+  "type": "cli+web",
   "price_cny": 29,
+  "price_usd": 4,
   "files": [
-    "ai_cost_compare.py",
+    "main.py",
     "ai_coding_planner.py",
     "cost_calculator.py",
-    "main.py",
-    "README.md"
+    "index.html",
+    "README.md",
+    "requirements.txt"
   ],
   "tags": [
     "AI",
     "cost calculator",
+    "programming tools",
     "Cursor",
     "Copilot",
     "Claude",
     "DeepSeek",
-    "Markdown export"
+    "省钱"
   ],
-  "description": "AI编程工具成本对比计算器v2.1 - 11款工具对比(Cursor/Copilot/Claude Code/DeepSeek等)，5种套餐推荐，支持Markdown/CSV导出，按预算推荐",
-  "xianyu_title": "AI编程成本计算器 11款工具对比 Markdown导出 一键找最省方案",
+  "description": "4个问题找到最省钱的AI编程方案。12款AI工具对比（Cursor/Copilot/Claude Code/DeepSeek等），6种套餐推荐，支持CLI交互+网页版双模式。",
+  "xianyu_title": "AI编程成本计算器 12款工具对比 一键找最省钱方案 支持网页版",
   "xianyu_price": 29,
   "features": [
-    "11款AI工具全面对比",
-    "月度/年度成本表格",
-    "5种省钱套餐",
-    "Markdown/CSV导出",
-    "按预算智能推荐",
-    "零依赖纯Python"
+    "4步交互式问答推荐",
+    "12款AI编程工具全面对比",
+    "6种省钱套餐方案",
+    "精确月费/年费计算",
+    "CLI+网页双模式",
+    "离线可用零依赖"
   ],
   "updated": "2026-05-14"
 }
